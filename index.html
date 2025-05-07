@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surpresa do Dia das Mães</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .heart-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #e05c85;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      animation: pulse 1.5s infinite;
+    }
+
+    .heart-button:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.1); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela 1 -->
+  <div class="container active" id="screen1">
+    <div class="image-wrapper">
+      <img src="https://raw.githubusercontent.com/TheLMick/paravoce/main/1.jpg" alt="Imagem 1">
+      <button class="heart-button" onclick="showNext('screen1', 'screen2')"❤️</button>
+    </div>
+  </div>
+
+  <!-- Tela 2 -->
+  <div class="container" id="screen2">
+    <div class="image-wrapper">
+      <img src="https://raw.githubusercontent.com/TheLMick/paravoce/main/2.jpg" alt="Imagem 2">
+      <button class="heart-button" onclick="showNext('screen2', 'screen3')">❤️</button>
+    </div>
+    <p class="message">Mensagem 2: Você é a melhor mãe do mundo!</p>
+  </div>
+
+  <!-- Tela 3 -->
+  <div class="container" id="screen3">
+    <div class="image-wrapper">
+      <img src="https://raw.githubusercontent.com/TheLMick/paravoce/main/3.jpg" alt="Imagem 3">
+      <button class="heart-button" onclick="showNext('screen3', 'screen4')">❤️</button>
+    </div>
+    <p class="message">Mensagem 3: Obrigado por tudo que você faz!</p>
+  </div>
+
+  <!-- Tela Final -->
+  <div class="container" id="screen4">
+    <div class="image-wrapper">
+      <img src="https://raw.githubusercontent.com/TheLMick/paravoce/main/4.jpg" alt="Imagem 4">
+    </div>
+    <p class="message">Mensagem final: Te amo infinitamente! Feliz Dia das Mães! 💖</p>
+  </div>
+
+  <script>
+    function showNext(currentId, nextId) {
+      const current = document.getElementById(currentId);
+      current.style.animation = 'fadeOut 1s forwards';
+
+      setTimeout(() => {
+        current.classList.remove('active');
+        current.style.animation = '';
+        const next = document.getElementById(nextId);
+        next.classList.add('active');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
